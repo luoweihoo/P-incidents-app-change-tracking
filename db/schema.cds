@@ -22,10 +22,9 @@ entity Addresses : cuid, managed {
   streetAddress : String;
 }
 
-
 /**
  * Incidents created by Customers.
- */
+ **/
 entity Incidents : cuid, managed {
   customer      : Association to Customers;
   title         : String @title: 'Title';
@@ -38,6 +37,21 @@ entity Incidents : cuid, managed {
     message   : String;
   };
 }
+
+// entity Incidents : cuid, managed {
+//   customer      : Association to Customers;
+//   title         : String @title: 'Title';
+//   urgency       : Association to Urgency default 'M';
+//   status        : Association to Status default 'N';
+//   conversation  : Composition of many Conversations;
+// }
+
+entity Conversations: cuid {
+    timestamp : type of managed:createdAt;
+    author    : type of managed:createdBy;
+    message   : String;
+}
+
 
 entity Status : CodeList {
   key code        : String enum {
